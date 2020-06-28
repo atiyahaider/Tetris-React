@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Tetris-React/static/css/main.47838201.chunk.css",
+    "main.js": "/Tetris-React/static/js/main.ac220c57.chunk.js",
+    "main.js.map": "/Tetris-React/static/js/main.ac220c57.chunk.js.map",
+    "runtime-main.js": "/Tetris-React/static/js/runtime-main.5778fdec.js",
+    "runtime-main.js.map": "/Tetris-React/static/js/runtime-main.5778fdec.js.map",
+    "static/js/2.16936247.chunk.js": "/Tetris-React/static/js/2.16936247.chunk.js",
+    "static/js/2.16936247.chunk.js.map": "/Tetris-React/static/js/2.16936247.chunk.js.map",
+    "index.html": "/Tetris-React/index.html",
+    "precache-manifest.d487b5efe8bb929989c24224c9c073d5.js": "/Tetris-React/precache-manifest.d487b5efe8bb929989c24224c9c073d5.js",
+    "service-worker.js": "/Tetris-React/service-worker.js",
+    "static/css/main.47838201.chunk.css.map": "/Tetris-React/static/css/main.47838201.chunk.css.map",
+    "static/js/2.16936247.chunk.js.LICENSE.txt": "/Tetris-React/static/js/2.16936247.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/Tetris-React/static/media/trail-hGVk7r40q4k-unsplash.7937a9fa.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5778fdec.js",
+    "static/js/2.16936247.chunk.js",
+    "static/css/main.47838201.chunk.css",
+    "static/js/main.ac220c57.chunk.js"
+  ]
+}
