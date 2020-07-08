@@ -98,6 +98,11 @@ button {
   font-size: 1.05rem;
   color: white;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+button:focus { 
+  outline: none; 
 }
 
 button:hover {

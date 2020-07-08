@@ -9,7 +9,7 @@ const Cell = ({ value }) => {
         borderTopColor: 'hsl(' + color[0] + ', ' + color[1] + '%, 30%)',
         borderRightColor: 'hsl(' + color[0] + ', ' + color[1] + '%, 35%)',
         borderBottomColor: 'hsl(' + color[0] + ', ' + color[1] + '%, 67%)',
-        borderLeftColor: 'hsl(' + color[0] + ', ' + color[1] + '%, 45%)'
+        borderLeftColor: 'hsl(' + color[0] + ', ' + color[1] + '%, 20%)'
     };
 
     return (  

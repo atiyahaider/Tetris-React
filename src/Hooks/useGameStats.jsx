@@ -10,10 +10,18 @@ const useGameStats = (rowsCleared, rowsClearedChanged) => {
         const calculateScore = (rowsCleared) => {
             const linePoints = [40, 100, 300, 1200];
 
-            setScore(prev => prev + (linePoints[rowsCleared - 1] * (level + 1)));
+            let tempRows = rowsCleared;
+            let tempScore = 0;
+            while (tempRows > 4) {  //if more than 4 rows cleared
+                tempScore += linePoints[3] * (level + 1);    
+                tempRows -= 4;
+            }
+            setScore(prev => prev + tempScore + (linePoints[tempRows - 1] * (level + 1)));
+    
             // Increase level when player has cleared 10 rows
             if (rows + rowsCleared >= (level + 1) * LEVEL_CHANGE) 
                 setLevel(prev => prev + 1);
+
             setRows(prev => prev + rowsCleared);
         }
 
@@ -28,7 +36,11 @@ const useGameStats = (rowsCleared, rowsClearedChanged) => {
         setRows(0);
     }
 
-    return [level, score, rows, resetGameStats];
+    const updateScore = (newScore) => {
+        setScore(prev => prev + newScore);
+    }
+
+    return [level, score, rows, resetGameStats, updateScore];
 }
 
 export default useGameStats;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DROP_TIME } from '../constants';
+import { DROP_TIME, SOFT_DROP, HARD_DROP, KEYS } from '../constants';
 
 //components
 import Board from './Board';
@@ -20,7 +20,7 @@ const Tetris = () => {
 
     const [currentTetromino, nextTetromino, updateTetrominoPos, updateTetrominoShape, getNextTetromino, resetCurrentTetromino] = useCurrentTetromino();
     const [board, resetBoard, validMove, rowsCleared, tetris, rowsClearedChanged] = useBoard(currentTetromino, getNextTetromino, nextTetromino);
-    const [level, score, rows, resetGameStats] = useGameStats(rowsCleared, rowsClearedChanged);
+    const [level, score, rows, resetGameStats, updateScore] = useGameStats(rowsCleared, rowsClearedChanged);
 
     useInterval(() => {
         moveDown();
@@ -44,7 +44,7 @@ const Tetris = () => {
     }
 
     const calculateDropTime = () => {
-        return DROP_TIME - (level * 200);
+        return DROP_TIME / (level + 1) + 200;
     }   
 
     const resetGame = () => {
@@ -92,11 +92,12 @@ const Tetris = () => {
 
     const hardDrop = () => {
         let posX = 1;
-        let originalPosX = currentTetromino.posX;
+        let originalPosX = currentTetromino.rowPos;
         while (validMove(currentTetromino, posX, 0)) {
             posX++;
         }
         updateTetrominoPos(posX-1, 0, true);
+        updateScore(HARD_DROP * (posX - 1))
 
         if (isGameOver(nextTetromino.length, originalPosX + posX - 1)) {            
             setGameOver(true);
@@ -107,23 +108,25 @@ const Tetris = () => {
 
     const moveTetromino = (e) => {
         if (running) {
+            if (Object.values(KEYS).includes(e.keyCode)) {
+                setDropTime(null);
+            }
+
             switch (e.keyCode) {
-                case 37:   //left
+                case KEYS.LEFT:   //left
                     moveHorizontal(-1);
                     break;
-                case 39:   //right
+                case KEYS.RIGHT:   //right
                     moveHorizontal(1);
                     break;
-                case 40:   //down
-                    setDropTime(null);
+                case KEYS.DOWN:   //down
                     moveDown();
+                    updateScore(SOFT_DROP);
                     break;
-                case 32:   // hard drop
-                    e.preventDefault(); //to stop spacebar from activating button click
-                    setDropTime(null);
+                case KEYS.SPACE:   // hard drop
                     hardDrop();
                     break;
-                case 38:   //up, rotate
+                case KEYS.UP:   //up, rotate
                     rotate();
                     break;
                 default:
@@ -133,8 +136,9 @@ const Tetris = () => {
     }   
 
     const keyRelease = (e) => {
+        e.preventDefault(); //to stop spacebar from activating button click        
         if (running) {
-            if (e.keyCode === 40 || e.keyCode === 32) {
+            if (Object.values(KEYS).includes(e.keyCode)) {
                 setDropTime(calculateDropTime());
             }
         }
